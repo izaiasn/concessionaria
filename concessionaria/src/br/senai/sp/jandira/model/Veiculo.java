@@ -13,8 +13,8 @@ public class Veiculo {
 
      Scanner teclado = new Scanner(System.in);
 
-     public void CadastrarVeiculo(){
-         System.out.println("------------------Cadastro------------------");
+     public void cadastrarVeiculo(){
+         System.out.println("------------------Cadastro Veiculo------------------");
          System.out.println("Digite modelo: ");
          modelo = teclado.nextLine();
          System.out.println("Digite marca: ");
@@ -29,9 +29,8 @@ public class Veiculo {
          ano = teclado.nextInt();
          System.out.println("Digite o Preço: ");
          preco = teclado.nextDouble();
-         teclado.nextLine();
          System.out.println("-------------------------------------------");
-         teclado.close();
+
      }
 
 }

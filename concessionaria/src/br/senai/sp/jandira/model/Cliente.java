@@ -10,27 +10,30 @@ public class Cliente {
      long telefone;
      long cpf;
      long rg;
+     double money;
 
      Scanner teclado = new Scanner(System.in);
 
-     public void CadastrarCliente(){
+     public void cadastrarCliente(){
 
-         System.out.println("------------------Cadastro------------------");
-         System.out.println("Digite seu nome: ");
+         System.out.println("----------Cadastro Cliente----------");
+         System.out.print("Digite seu nome: ");
          nome = teclado.nextLine();
-         System.out.println("Digite seu email: ");
+         System.out.print("Digite seu email: ");
          email = teclado.next();
-         System.out.println("Digite seu endereco: ");
+         System.out.print("Digite seu endereco: ");
          endereco = teclado.next();
-         System.out.println("Digite seu CPF: ");
+         System.out.print("Digite seu CPF: ");
          cpf = teclado.nextLong();
-         System.out.println("Digite seu RG: ");
+         System.out.print("Digite seu RG: ");
          rg = teclado.nextLong();
          teclado.nextLine();
-         System.out.println("Digite seu telefone: ");
+         System.out.print("Digite seu telefone: ");
          telefone = teclado.nextLong();
+         System.out.println("Informe o valor disponivel para compra: ");
+         money = teclado.nextDouble();
          System.out.println("-------------------------------------------");
-         teclado.close();
+
 
     }
 
