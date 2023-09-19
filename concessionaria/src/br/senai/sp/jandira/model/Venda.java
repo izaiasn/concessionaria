@@ -1,24 +1,44 @@
 package br.senai.sp.jandira.model;
 
 public class Venda {
-    boolean venda = true;
 
-    public boolean realizarVenda(Veiculo objetoVeiculo, Cliente objetoCliente){
+    public boolean realizarVenda(Cliente objCliente, Veiculo objVeiculo){
 
-        if (objetoCliente.money >= objetoVeiculo.preco){
 
-            System.out.println("Parabens! ");
-            System.out.println( objetoCliente.nome + "Compra realizada ! ");
-            System.out.println("No preço de " + objetoVeiculo.preco);
+        System.out.println("------ Validando Venda -------");
+
+
+        for (Cliente refeObjCliente: objCliente.listCliente){
+            System.out.println("re: " + refeObjCliente.nome);
+
+        for (Veiculo refeObjVeiculo: objVeiculo.listveiculos){
+            System.out.println(refeObjVeiculo.modelo);
+            if (refeObjCliente.dinheiroDisponivel >= refeObjVeiculo.preco){
+                System.out.println("------------------- Parabéns  --------------------");
+                System.out.println("Olá " + refeObjCliente.nome);
+                System.out.println("Você acaba de adquirir um " + refeObjVeiculo.modelo);
+                System.out.println("No precinho de " + refeObjVeiculo.preco);
+                System.out.println("--------------------------------------------------");
+
+            }
+        }
+        }
+        if (objCliente.dinheiroDisponivel >= objVeiculo.preco){
+
+            System.out.println("------------------- Parabéns  --------------------");
+
+
+
+
             return true;
 
-        }else {
-            System.out.println("Escolha um veiculo mais em conta! ");
-            System.out.println("Saldo: "+ objetoCliente.money);
+        } else {
+            System.out.println("Escolha um carro mais acessivel");
             return false;
         }
 
 
-
     }
+
+
 }

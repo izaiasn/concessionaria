@@ -3,77 +3,110 @@ package br.senai.sp.jandira.model;
 import java.util.Scanner;
 
 public class Menu {
+
     public void menu(){
-        System.out.println("-------------------------------------");
-        System.out.println("-                                   -");
-        System.out.println("-                                   -");
-        System.out.println("--------------Bem vindo--------------");
-        System.out.println("-                                   -");
-        System.out.println("-                                   -");
-        System.out.println("-------------------------------------");
-
-        Cliente newObjCliente = new Cliente();
 
 
-        Veiculo newObjveiculo = new Veiculo();
 
+        Cliente refelistCliente = new Cliente();
 
-        Venda newObjVenda = new Venda();
+        Veiculo refeListVeiculo = new Veiculo();
+        Funcionario refeListFuncionario = new Funcionario();
+        Funcionario objFuncionario = new Funcionario();
+        Venda objVenda = new Venda();
 
-        Funcionario newObjFuncionario = new Funcionario();
-
-
-        boolean continua = true;
         Scanner teclado = new Scanner(System.in);
 
-        while (continua){
-            System.out.println("-------------------------------------");
-            System.out.println("-                                   -");
-            System.out.println("-                                   -");
-            System.out.println("- 1- Cadastro Cliente               -");
-            System.out.println("- 2- Cadastro Veiculo               -");
-            System.out.println("- 3- Cadastro funcionario           -");
-            System.out.println("- 4- Realizar venda                 -");
-            System.out.println("- 5- Sair                           -");
-            System.out.println("-                                   -");
-            System.out.println("-                                   -");
-            System.out.println("-------------------------------------");
-            int escolhaUsuario = teclado.nextInt();
+        boolean continuar = true;
 
-            switch (escolhaUsuario){
+
+        while (continuar){
+
+            System.out.println("\n-/-/-/-/-/-/-/-/-/-/-/");
+            System.out.println("1 - Cadastrar Cliente");
+            System.out.println("2 - Cadastrar Veiculo");
+            System.out.println("3 - Cadastrar Funcionario");
+            System.out.println("4 - Realizar Venda");
+            System.out.println("5 - Listar Veiculos");
+            System.out.println("6 - Listar Cliente");
+            System.out.println("7 - Listar Funcionario");
+            System.out.println("9 - Sair do App");
+            System.out.println("-/-/-/-/-/-/-/-/-/-/-/");
+
+            int decisao = teclado.nextInt();
+            teclado.nextLine();
+
+            switch (decisao){
+
                 case 1:
-                    newObjCliente.cadastrarCliente();
+                    Cliente objCliente = new Cliente();
+                    objCliente.cadastrarCliente();
+                    refelistCliente.adicionarCliente(objCliente);
                     break;
 
                 case 2:
-                    newObjveiculo.cadastrarVeiculo();
+                    Veiculo objVeiculo = new Veiculo();
+                    objVeiculo.CadastrarVeiculo();
+                    refeListVeiculo.adicionarVeiculo(objVeiculo);
                     break;
 
                 case 3:
-                    newObjFuncionario.castroFuncionario();
 
+                    objFuncionario.cadastrarFuncionario();
+                    refeListFuncionario.adicionarFuncionario(objFuncionario);
                     break;
 
                 case 4:
-                   boolean validaVenda = newObjVenda.realizarVenda(newObjveiculo , newObjCliente);/** Passar argumento esperados (Venda e Cliente) */
-                   if (validaVenda){
-                       newObjCliente.money -= newObjveiculo.preco;
-                       System.out.println("O saldo do cliente: "+ newObjCliente.money);
+                    boolean venda = objVenda.realizarVenda(refelistCliente, refeListVeiculo);
 
-
-                   }
-                   newObjFuncionario.receberComissao(newObjveiculo);
-                    System.out.println("Funcionario " + newObjFuncionario.nome + "Vai receber de Bonus " + newObjFuncionario.comissao);
-
+                    if (venda){
+                        refelistCliente.dinheiroDisponivel -= refeListVeiculo.preco;
+                    }
+                    objFuncionario.bonusFuncionario(refeListVeiculo);
+                    System.out.println("O funcionario Recebeu: " +objFuncionario.bonus);
                     break;
 
                 case 5:
-                    continua = false;
+
+                    refeListVeiculo.listaVeiculo();
                     break;
-            }if (escolhaUsuario < 1 || escolhaUsuario > 5){
-                System.out.println("Escolha uma opção válida!!");
+
+                case 6:
+                    refelistCliente.listarCliente();
+                    break;
+
+                case 7:
+                    refeListFuncionario.listarFuncionario();
+                    break;
+
+                case 8:
+                    System.out.println("\nInforme o nome do veiculo: ");
+                    String veiculoPesquisado = teclado.nextLine();
+                    boolean validaVeiculo = false;
+
+                    if (veiculoPesquisado != null && veiculoPesquisado != "" ){
+                        validaVeiculo = refeListVeiculo.pesquisarVeiculo(veiculoPesquisado);}
+
+                    if (validaVeiculo){
+                        System.out.println("\n------------------");
+                        System.out.println("Veiculo Disponivel");
+                        System.out.println("------------------");
+                    }else {
+                        System.out.println("\n------------------");
+                        System.out.println("Veiculo indisponivel");
+                        System.out.println("------------------");
+                    }
+                    break;
+
+                case 9:
+                    continuar = false;
+                    break;
             }
 
+            if (decisao < 0 || decisao > 9 ){
+                System.out.println("\nDigite uma opção válida");
+            }
         }
+
     }
 }

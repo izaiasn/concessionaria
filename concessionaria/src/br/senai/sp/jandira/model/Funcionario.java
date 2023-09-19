@@ -1,45 +1,58 @@
 package br.senai.sp.jandira.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Funcionario {
+
     String nome;
     String email;
     String endereco;
     long telefone;
     long cpf;
     long rg;
-    double comissao;
+    double  bonus;
 
     Scanner teclado = new Scanner(System.in);
+    List<Funcionario> listaFuncionario= new ArrayList<>();
 
-    public void castroFuncionario(){
-        System.out.println("------------------Cadastro Funcionario------------------");
-        System.out.print("Digite seu nome: ");
+    public void cadastrarFuncionario(){
+
+        System.out.println("-/-/-/-/-/-/-/-/-/Cadastrar-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
+        System.out.println("Digite seu nome: ");
         nome = teclado.nextLine();
-        System.out.print("Digite seu email: ");
+        System.out.println("Digite seu email: ");
         email = teclado.next();
-        System.out.print("Digite seu endereco: ");
+        System.out.println("Digite seu endereco: ");
         endereco = teclado.next();
-        System.out.print("Digite seu CPF: ");
+        System.out.println("Digite seu CPF: ");
         cpf = teclado.nextLong();
-        System.out.print("Digite seu RG: ");
+        System.out.println("Digite seu RG: ");
         rg = teclado.nextLong();
         teclado.nextLine();
-        System.out.print("Digite seu telefone: ");
+        System.out.println("Digite seu telefone: ");
         telefone = teclado.nextLong();
-        System.out.println("Informe o valor da comissão: ");
-        comissao = teclado.nextDouble();
-        System.out.println("-------------------------------------------");
+        System.out.println("-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/");
+
+        System.out.println("Cadastro Finalizado");
     }
 
-    public void receberComissao(Veiculo objVeiculo){
+    public void bonusFuncionario(Veiculo objVeiculo){
 
-        comissao = objVeiculo.preco*0.10;
-        System.out.println(comissao);
-
-
-
+        bonus = objVeiculo.preco * 0.10;
     }
+
+    public  void adicionarFuncionario(Funcionario objFuncionario){
+        listaFuncionario.add(objFuncionario);
+    }
+
+    public void listarFuncionario(){
+        for (Funcionario objFuncionario: listaFuncionario){
+            System.out.println("Modelo: "+ objFuncionario.nome + " Ano: "+ objFuncionario.email+" Preço: "+ objFuncionario.bonus);
+        }
+    }
+
+
 
 }
