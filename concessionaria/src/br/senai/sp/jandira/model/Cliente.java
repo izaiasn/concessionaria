@@ -10,7 +10,6 @@ public class Cliente {
      String email;
      String endereco;
      double dinheiroDisponivel;
-     double valor;
      long telefone;
      long cpf;
      long rg;
@@ -47,8 +46,16 @@ public class Cliente {
 
     public void listarCliente(){
         for (Cliente objCliente: listCliente){
-            System.out.println("Modelo: "+ objCliente.nome + " Ano: "+ objCliente.email+" Preço: "+objCliente.valor);
+            System.out.println("Nome "+ objCliente.nome + " Email: "+ objCliente.email+" Valor em caixa: "+objCliente.dinheiroDisponivel);
         }
+    }
+
+    public Cliente pesquisarComprador(String nome){
+         for (Cliente cliente: listCliente){
+             if (cliente.nome.equalsIgnoreCase(nome)){
+                 return cliente;
+             }
+         }return null;
     }
 
 }

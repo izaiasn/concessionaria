@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class Menu {
 
     public void menu(){
-
-
-
         Cliente refelistCliente = new Cliente();
 
         Veiculo refeListVeiculo = new Veiculo();
@@ -30,9 +27,11 @@ public class Menu {
             System.out.println("5 - Listar Veiculos");
             System.out.println("6 - Listar Cliente");
             System.out.println("7 - Listar Funcionario");
+            System.out.println("8 - Listar validar veiculo");
             System.out.println("9 - Sair do App");
             System.out.println("-/-/-/-/-/-/-/-/-/-/-/");
 
+            System.out.print("\nESCOLHA UMA DAS OPÇÕES DO MENU: ");
             int decisao = teclado.nextInt();
             teclado.nextLine();
 
@@ -57,14 +56,50 @@ public class Menu {
                     break;
 
                 case 4:
-                    boolean venda = objVenda.realizarVenda(refelistCliente, refeListVeiculo);
 
-                    if (venda){
-                        refelistCliente.dinheiroDisponivel -= refeListVeiculo.preco;
+                    System.out.print("Informe o nome do Cliente: ");
+                    String nomeCliente = teclado.nextLine();
+                    refelistCliente.listarCliente();
+
+
+                    System.out.print("Informe o nome do Veiculo: ");
+                    String nomeVeiculo = teclado.nextLine();
+                    refeListVeiculo.listaVeiculo();
+
+
+                    System.out.print("Informe o nome do Vendedor: ");
+                    String nomeVendedor = teclado.nextLine();
+                    refeListFuncionario.listarFuncionario();
+
+                    Cliente objComprador= refelistCliente.pesquisarComprador(nomeCliente);
+
+                    Veiculo objVeiculoVenda = refeListVeiculo.localizarVeiculoCompra(nomeVeiculo);
+
+                    Funcionario objvebdedor = refeListFuncionario.localizaVendedor(nomeVendedor);
+
+
+                    boolean venda = objVenda.realizarVenda(objComprador, objVeiculoVenda);
+
+                    boolean formaPagamento = objVenda.validarFormaPagamento();
+
+                    boolean vendaDireta = false;
+                    boolean vendaFinanciada = false;
+
+                    if (formaPagamento) {
+                        vendaDireta = objVenda.realizarVenda(objComprador, objVeiculoVenda);
+                    } else {
+                        vendaFinanciada = objVenda.financiarVeiculo(objComprador, objVeiculoVenda);
                     }
-                    objFuncionario.bonusFuncionario(refeListVeiculo);
-                    System.out.println("O funcionario Recebeu: " +objFuncionario.bonus);
-                    break;
+
+                    if (vendaDireta || vendaFinanciada){
+                        objComprador.dinheiroDisponivel -= objVeiculoVenda.preco;
+                        System.out.println("Seu saldo é: " + objComprador.dinheiroDisponivel);
+
+                        objvebdedor.bonusFuncionario(objVeiculoVenda);
+
+                        System.out.println("O Funcionario recebeu: " + objvebdedor.bonus);
+
+                    }
 
                 case 5:
 
@@ -88,11 +123,11 @@ public class Menu {
                         validaVeiculo = refeListVeiculo.pesquisarVeiculo(veiculoPesquisado);}
 
                     if (validaVeiculo){
-                        System.out.println("\n------------------");
+                        System.out.println("--------------------");
                         System.out.println("Veiculo Disponivel");
                         System.out.println("------------------");
                     }else {
-                        System.out.println("\n------------------");
+                        System.out.println("--------------------");
                         System.out.println("Veiculo indisponivel");
                         System.out.println("------------------");
                     }

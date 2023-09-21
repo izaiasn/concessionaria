@@ -49,8 +49,17 @@ public class Funcionario {
 
     public void listarFuncionario(){
         for (Funcionario objFuncionario: listaFuncionario){
-            System.out.println("Modelo: "+ objFuncionario.nome + " Ano: "+ objFuncionario.email+" Preço: "+ objFuncionario.bonus);
+            System.out.println("Nome: "+ objFuncionario.nome + " Email: "+ objFuncionario.email+" Bonus: "+ objFuncionario.bonus);
         }
+    }
+
+    public Funcionario localizaVendedor(String nome){
+        for (Funcionario vendedor: listaFuncionario){
+            if (vendedor.nome.equalsIgnoreCase((nome))){
+                return vendedor;
+            }
+        }return null;
+
     }
 
 

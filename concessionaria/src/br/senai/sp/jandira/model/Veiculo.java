@@ -53,6 +53,15 @@ public class Veiculo {
              }
          }return false;
      }
+
+     public Veiculo localizarVeiculoCompra(String modeloVeiculo){
+
+         for(Veiculo veiculo: listveiculos){
+             if (veiculo.modelo.equalsIgnoreCase(modeloVeiculo)){
+                 return veiculo;
+             }
+         }return null;
+     }
 }
 
 
